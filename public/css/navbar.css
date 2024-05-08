@@ -18,7 +18,7 @@ header {
     align-items: center;
 }
 
-nav a {
+.animation {
     color: #fff;
     text-decoration: none;
     margin-right: 20px;
@@ -26,6 +26,7 @@ nav a {
     transition: transform 0.2s;
 }
 
-nav a:hover {
+.animation:hover {
     transform: scale(1.1);
 }
+

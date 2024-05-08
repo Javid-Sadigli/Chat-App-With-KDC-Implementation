@@ -57,13 +57,13 @@ button:hover {
     transform: scale(1.05);
 }
 
-a {
+a{
     color: darkgreen;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
 }
 
-a:hover {
+.animation:hover {
     text-decoration: underline;
 }
