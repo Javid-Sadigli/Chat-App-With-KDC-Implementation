@@ -25,7 +25,6 @@ class User
             if(this.#id == -1)
             {
                 if(length > 0){
-                    console.log(this);
                     this.#id = users[length - 1].id + 1;
                 } 
                 else this.#id = 1;
@@ -37,8 +36,6 @@ class User
                     public_key: this.public_key,
                     private_key: this.private_key
                 }); 
-                
-                filesystem.writeToFile(database_path, users, CALLBACK);
             }
             else 
             {
@@ -52,8 +49,9 @@ class User
                         users[i].private_key = this.private_key;
                     }
                 }
-                filesystem.writeToFile(database_path, users, CALLBACK);
             }
+            
+            filesystem.writeToFile(database_path, users, CALLBACK);
         });
     }
 

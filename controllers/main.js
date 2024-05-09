@@ -3,7 +3,7 @@ const User = require('../models/user');
 module.exports.SEND_Info = (req, res, next) => {
     if(req.info)
     {
-        res.send(`<h1>INFO</h1> ${req.info} <br> <a href="/">Home</a>`);
+        res.render('info', {page_title : "Info", info : req.info}); 
     }
     else
     {
@@ -12,14 +12,13 @@ module.exports.SEND_Info = (req, res, next) => {
 }
 
 module.exports.SEND_Error_Page = (req, res, next) => {
-
     if(req.error_message)
     {
-        res.send(`<h1>ERROR</h1> ${req.error_message} <br> <a href="/">Home</a>`);
+        res.render('error', {page_title : "Error", error_message : req.error_message});
     }
     else 
     {
-        res.status(404).send(`<h1>ERROR</h1> 404 Not Found <br> <a href="/">Home</a>`);
+        res.status(404).render('error', {page_title : "Error", error_message : "404 Not Found"});
     }
 };
 
