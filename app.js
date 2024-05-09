@@ -53,6 +53,6 @@ app.listen(
     variables.hostname, 
     function(result)
     {
-        console.log(`\n\nServer successfully started at http://${variables.hostname}:${variables.port}\n`);
+        console.log(`\nServer successfully started at http://${variables.hostname}:${variables.port}\n`);
     }
 );

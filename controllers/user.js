@@ -1,5 +1,5 @@
 module.exports.GET_Home = (req, res, next) => {
-    res.render('home', {page_title : "Home"});
+    return res.render('home', {page_title : "Home"});
 };
 
 module.exports.GET_Log_Out = (req, res, next) => {
@@ -12,6 +12,17 @@ module.exports.GET_Log_Out = (req, res, next) => {
     else 
     {
         req.error_message = "You have not logged in!";
+        return next();
+    }
+}; 
+
+module.exports.GET_Profile = (req, res, next) => {
+    if(req.logged_in) 
+    {
+        return res.render('profile', {page_title : "Profile"});
+    }
+    else
+    {
         return next();
     }
 }; 
