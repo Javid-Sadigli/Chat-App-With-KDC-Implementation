@@ -8,7 +8,7 @@ module.exports.GET_Login = (req, res, next) => {
     else 
     {
         req.error_message = "You should log out before logging in.";
-        return next();
+        next();
     }
 }; 
 
