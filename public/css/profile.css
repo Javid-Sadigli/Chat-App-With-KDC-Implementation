@@ -1,0 +1,60 @@
+.profile-div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    padding: 40px;
+    border-radius: 20px;
+    background-color: white;
+    font-size: 20px;
+    width: 400px;
+    height: 300px;
+
+}
+
+body{
+    background-color: darkgray;
+}
+
+.username-div,
+.password-div {
+    margin-bottom: 20px;
+    display: flex;
+    font-size: 20px;
+}
+
+.logout {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid darkgreen;
+    border-radius: 5px;
+    background-color: darkgreen;
+    transition: background-color 0.3s, color 0.3s;
+    display: block;
+    width: 50%;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.logout:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+    color: white;
+}
+
+.profile-header {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    color: darkgreen;
+
+}
