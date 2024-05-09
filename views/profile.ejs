@@ -1,0 +1,29 @@
+<%- include('includes/head.ejs') %>
+</head>
+<body>
+    <%- include('includes/navbar.ejs') %>
+
+    <!-- 
+
+        Rəcəb burda sadəcə logout görünür username və password görünmür çünki headerin altına girirlər. 
+        Headerin z-indexi də ki 1000-di deyə ən qabaqda o görünür. 
+        Profile-a styling edəndə bu bugları da fix elə sonra da bu commenti sil.
+
+    -->
+
+    <div class="profile-div">
+        <div class="username-div">
+            <div class="username-label">Username : </div>
+            <div class="username"><%= user.username %></div>
+        </div>
+        <div class="password-div">
+            <div class="password-label">Password : </div>
+            <div class="password"><%= user.password %></div>
+        </div>
+
+        <a href="/logout">Log out</a>
+
+    </div>
+
+</body>
+</html>
