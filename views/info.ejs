@@ -2,9 +2,12 @@
 </head>
 <body>
     <%- include('includes/navbar.ejs') %>
+    <link rel="stylesheet" href="/css/info.css">
+    <div class="info-div">
+        <h1 class="info-header">INFO</h1>
+        <p class="info-message"><%= info %></p>
+    </div>
 
-    <h1>INFO</h1> 
-    <p><%= info %></p> 
-    <a href="/">Home</a>
+
 </body>
 </html>

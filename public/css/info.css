@@ -1,0 +1,16 @@
+.info-header {
+    text-align: center;
+    color: lightgray;
+}
+
+.info-message {
+    color: lightgray;
+    text-align: center;
+}
+.info-div {
+    background-color:slategrey;
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+    margin: 100px auto;
+}
