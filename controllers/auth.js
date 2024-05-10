@@ -54,6 +54,7 @@ module.exports.POST_Login = (req, res, next) => {
         {
             req.session.user_id = user.id; 
             req.info = "You have successfully logged in.";
+            res.locals.logged_in = true;
             return next();
         }
         else if(user)
