@@ -1,14 +1,14 @@
 .info-header {
     text-align: center;
-    color: lightgray;
+    color: black;
 }
 
 .info-message {
-    color: lightgray;
+    color: black;
     text-align: center;
 }
 .info-div {
-    background-color:slategrey;
+    background-color:lightgray;
     padding: 20px;
     border-radius: 10px;
     width: 500px;
