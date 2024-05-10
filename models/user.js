@@ -1,9 +1,12 @@
 const rsa = require('../toolkit/rsa');
+const caesar_cipher = require('../toolkit/caesar_cipher');
 const variables = require("../variables");
 const path = require("path");
 const filesystem = require("../toolkit/filesystem");
 
 const database_path = path.join(variables.database_path, "users.json");
+
+const Message = require("./message"); 
 
 class User 
 {

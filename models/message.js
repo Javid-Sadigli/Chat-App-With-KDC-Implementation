@@ -8,12 +8,13 @@ const database_path = path.join(variables.database_path, "messages.json");
 class Message 
 {
     #id; 
-    constructor(from, to, subject, content)
+    constructor(from, to, subject, content, key)
     {
         this.from = from;
         this.to = to;
         this.subject = subject;
         this.content = content;
+        this.key = key;
         this.#id = -1;
     }
 
@@ -22,7 +23,7 @@ class Message
         return this.#id;
     }
 
-    save()
+    save(CALLBACK)
     {
         Message.findAll((messages) => {
             const length = messages.length; 
@@ -38,7 +39,8 @@ class Message
                     from: this.from, 
                     to: this.to,
                     subject: this.subject,
-                    content: this.content
+                    content: this.content, 
+                    key: this.key
                 }); 
             }
             else 
@@ -51,6 +53,7 @@ class Message
                         messages[i].to = this.to;
                         messages[i].subject = this.subject;
                         messages[i].content = this.content;
+                        messages[i].key = this.key;
                     }
                 }
             }
@@ -67,33 +70,35 @@ class Message
         }); 
     }
 
-    static filterByFrom(from)
+    static filterByFrom(from, CALLBACK)
     {
         Message.findAll((messages) => {
             const length = messages.length;
+            let filtered_messages = [];
             for(let i = 0; i < length; i++)
             {
                 if(messages[i].from == from)
                 {
-                    return CALLBACK(messages[i]);
+                    filtered_messages.push(messages[i]);
                 }
             }; 
-            CALLBACK(undefined);
+            CALLBACK(filtered_messages);
         });
     }
 
-    static filterByTo(to)
+    static filterByTo(to, CALLBACK)
     {
         Message.findAll((messages) => {
             const length = messages.length;
+            let filtered_messages = [];
             for(let i = 0; i < length; i++)
             {
                 if(messages[i].to == to)
                 {
-                    return CALLBACK(messages[i]);
+                    filtered_messages.push(messages[i]);
                 }
             }; 
-            CALLBACK(undefined);
+            CALLBACK(filtered_messages);
         });
     }
 
