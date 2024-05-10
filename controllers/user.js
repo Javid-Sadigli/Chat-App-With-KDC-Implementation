@@ -7,6 +7,7 @@ module.exports.GET_Log_Out = (req, res, next) => {
     {
         req.session.user_id = undefined;
         req.info = "You have logged out successfully.";
+        res.locals.logged_in = false;
         return next();
     }
     else 

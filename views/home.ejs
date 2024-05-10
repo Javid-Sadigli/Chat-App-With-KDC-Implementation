@@ -1,8 +1,20 @@
 <%- include('includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
     <%- include('includes/navbar.ejs') %>
 
-    
+    <main>
+        <% if (logged_in) { %>
+     
+        <% } else { %>
+            <h1 class="login-h1">Welcome to the Messaging System</h1>
+            <p class="login-p">
+                For starting to send and receive 
+                messages, you need to login first. 
+            </p>
+            <a href="/login" class="login-a">Login</a>
+        <% } %>
+    </main>
 </body>
 </html>
