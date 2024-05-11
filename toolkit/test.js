@@ -1,5 +1,5 @@
-const rsa = require("./rsa"); 
-const caesar = require("./caesar_cipher"); 
+const rsa = require("../public/js/rsa"); 
+const caesar = require("../public/js/caesar_cipher"); 
 
 const mytext = "Hello world"; 
 const key = Math.floor(Math.random() * 26) + 1;

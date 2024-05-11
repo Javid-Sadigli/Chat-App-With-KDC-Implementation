@@ -1,0 +1,52 @@
+<%- include('includes/head.ejs') %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js" integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <!-- <%- include('includes/navbar.ejs') %> -->
+
+    <script src="/js/rsa.js"></script>
+    <script src="/js/caesar_cipher.js"></script>
+    <script>
+        const socket = io();
+
+        // Generate RSA key pair
+        const [publicKey, privateKey] = generateKeyPair();
+
+        const username = '<%= user.username %>'
+
+        // Join a room with public key
+        socket.emit('joinRoom', { room: 'roomName', publicKey: publicKey, username: username });
+
+        // Receive encrypted session key
+        socket.on('encryptedSessionKey', (encryptedSessionKey) => {
+        // Decrypt session key with private key
+        const decryptedSessionKey = key.decrypt(encryptedSessionKey, 'utf8');
+        console.log('Decrypted Session Key:', decryptedSessionKey);
+        });
+
+        function sendMessageToServer(){
+            const message = document.getElementById('message').value;
+            socket.emit('sendMessage', { room: roomId, message: message, username: username});
+        }
+
+        function receiveMessageFromServer(){
+            
+        }
+
+
+        // Receive messages
+        socket.on('message', ({message, username}) => {
+            console.log('Received message:', message, "from", username);
+        });
+
+    </script>
+
+    <div class="send-message-div">
+        <input type="text" placeholder="Send message" id="message">
+        <button type="button" onclick="sendMessageToServer()">Send</button>
+    </div>
+
+    
+
+</body>
+</html>
