@@ -44,6 +44,91 @@ module.exports.GET_Rooms = (req, res, next) => {
     }
 };
 
+module.exports.GET_Create_Room = (req, res, next) => {
+    if(req.logged_in)
+    {
+        res.render('create_room', {page_title : 'Create Room'});
+    }
+    else 
+    {
+        req.error_message = "You have not logged in!";
+        return next();
+    }
+};
+
+module.exports.POST_Create_Room = (req, res, next) => {
+    if(req.logged_in)
+    {
+        const title = req.body.title; 
+        const password = req.body.password;
+
+        const room = new Room(title, password); 
+        
+        room.save(() => {
+            req.info = "Room created successfully.";
+            return next();
+        });
+    }
+    else 
+    {
+        req.error_message = "You have not logged in!";
+        return next();
+    }
+};
+
+module.exports.GET_Chat_Room = (req, res, next) => {
+    if(req.logged_in)
+    {
+        const room_id = req.params.id;
+        Room.findById(room_id, (room) => {
+            if(room)
+            {
+                res.render('room_password', {page_title: 'Enter room password', room_id: room_id}); 
+            }
+            else 
+            {
+                req.error_message = "Room does not exist!";
+                return next();
+            }
+        });
+    }
+    else 
+    {
+        req.error_message = "You have not logged in!";
+        return next();
+    }
+};
+
+module.exports.POST_Chat_Room = (req, res, next) => {
+    if(req.logged_in)
+    {
+        const room_id = req.params.id;
+        const password = req.body.password;
+
+        Room.findById(room_id, (room) => {
+            if(room && room.password == password)
+            {
+                res.render('chat_room', {page_title : "Chat", room_id : room_id});
+            }
+            else if(room)
+            {
+                req.info = "Incorrect password!";
+                return next();
+            }
+            else 
+            {
+                req.error_message = "Room does not exist!";
+                return next();
+            }
+        });
+    }
+    else 
+    {
+        req.error_message = "You have not logged in!";
+        return next();
+    }
+};  
+
 module.exports.GET_Chat_Server = (req, res, next) => {
     const room_id = req.params.id;
     res.render('chat_server', {page_title : "Chat", room_id : room_id});

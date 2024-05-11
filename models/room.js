@@ -34,7 +34,8 @@ class Room
                 rooms.push({
                     id: this.id,
                     sessionKey : this.sessionKey, 
-                    password :  this.password
+                    password :  this.password, 
+                    title : this.title
                 }); 
             }
             else 
@@ -45,6 +46,7 @@ class Room
                     {
                         rooms[i].password = this.password; 
                         rooms[i].sessionKey = this.sessionKey;
+                        rooms[i].title = this.title;
                     }
                 }
             }
