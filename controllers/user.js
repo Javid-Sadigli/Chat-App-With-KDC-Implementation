@@ -27,3 +27,8 @@ module.exports.GET_Profile = (req, res, next) => {
         return next();
     }
 }; 
+
+module.exports.GET_Chat_Server = (req, res, next) => {
+    const room_id = req.params.id;
+    res.render('chat_server', {page_title : "Chat", room_id : room_id});
+};
