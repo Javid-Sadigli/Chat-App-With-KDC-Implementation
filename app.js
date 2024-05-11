@@ -18,6 +18,12 @@ const user_router = require("./routes/user");
 const main_controller = require("./controllers/main"); 
 const console_controller = require("./controllers/console"); 
 
+// Models 
+const Room = require("./models/room");
+
+// Tools 
+const rsa = require("./toolkit/rsa");
+
 // Connections
 const app = express();
 const store = new FileStore({
@@ -55,31 +61,36 @@ app.use(main_controller.SEND_Error_Page);
 
 /* Chat Server */
 io.on('connection', (socket) => {
-  console.log('A user connected');
 
-  // Joining a room
-  socket.on('joinRoom', ({ room, publicKey, username }) => {
-    socket.join(room);
-    console.log(`${username} joined room: ${room}`);
+    console.log('A user connected');
 
-    // Generate session key for the room if not already generated
-    if (!rooms[room]) {
-      rooms[room] = Math.floor(Math.random() * 26) + 1; // Random number between 1 and 26
-    }
+    // Joining a room
+    socket.on('joinRoom', ({room, publicKey, username}) => {
+        Room.findById(room, (the_room) => {
+            if(the_room)
+            {
+                socket.join(room);
+                console.log(`${username} joined room: ${room}`);
+                
+                const encryptedSessionKey = rsa.encrypt(publicKey, JSON.stringify(the_room.sessionKey));
+                
+                // Send encrypted session key to the user
+                io.to(socket.id).emit('encryptedSessionKey', encryptedSessionKey);
+            }
+        });
 
-    // Encrypt session key with user's public key
-    const rsaKey = new NodeRSA();
-    rsaKey.importKey(publicKey, 'pkcs8-public');
-    const encryptedSessionKey = rsaKey.encrypt(rooms[room].toString(), 'base64');
+    });
+    
+    socket.on('sendMessage', ({ room, message, username}) => {
+        io.to(room).emit('message', {message: message, username: username});
+        console.log(`Message from ${username} sent to room ${room}: ${message}`);
+        console.log(typeof room);
+    });
 
-    // Send encrypted session key to the user
-    io.to(socket.id).emit('encryptedSessionKey', encryptedSessionKey);
-  });
-
-  // Handling disconnection
-  socket.on('disconnect', () => {
-    console.log('A user disconnected');
-  });
+    // Handling disconnection
+    socket.on('disconnect', () => {
+        console.log('A user disconnected');
+    });
 });
 
 server.listen(

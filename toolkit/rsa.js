@@ -98,3 +98,9 @@ function decrypt(private_key, ciphertext)
     const plaintext = plaintextInt.map(char2 => String.fromCharCode(parseInt(char2))).join('');
     return plaintext;
 }
+
+module.exports = {
+    generateKeyPair : generateKeyPair,
+    encrypt : encrypt,
+    decrypt : decrypt 
+}; 

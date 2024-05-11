@@ -23,3 +23,8 @@ function cipher(text, shift) {
 function decipher(text, shift) {
     return cipher(text, 26 - shift);
 }
+
+module.exports = {
+    cipher : cipher,
+    decipher : decipher
+};

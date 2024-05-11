@@ -7,8 +7,9 @@ const database_path = path.join(variables.database_path, "rooms.json");
 
 class Room 
 {
-    constructor(password)
+    constructor(title, password)
     {
+        this.title = title;
         this.sessionKey = Math.floor(Math.random() * 26) + 1; 
         this.password = password; 
         this.id = -1;
@@ -55,7 +56,7 @@ class Room
     static findById(id, CALLBACK)
     {
         Room.findAll((rooms) => {
-            const length = users.length;
+            const length = rooms.length;
             for(let i = 0; i < length; i++)
             {
                 if(rooms[i].id == id)

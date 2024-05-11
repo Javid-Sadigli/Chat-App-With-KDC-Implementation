@@ -1,1 +1,5 @@
-[]
+[{
+    "id" : 1, 
+    "password" : "1234", 
+    "sessionKey" : 5
+}]
