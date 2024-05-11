@@ -1,5 +1,19 @@
 [{
     "id" : 1, 
     "password" : "1234", 
-    "sessionKey" : 5
-}]
+    "sessionKey" : 5, 
+    "title" : "My Room"
+},
+    {"id" : 2, 
+    "password" : "1234", 
+    "sessionKey" : 3, 
+    "title" : "My 2nd Room"
+}, 
+    {"id" : 3, 
+    "password" : "1234", 
+    "sessionKey" : 4, 
+    "title" : "My 3rd Room"
+}        
+
+
+]

@@ -1,3 +1,5 @@
+const Room = require('../models/room'); 
+
 module.exports.GET_Home = (req, res, next) => {
     return res.render('home', {page_title : "Home"});
 };
@@ -27,6 +29,20 @@ module.exports.GET_Profile = (req, res, next) => {
         return next();
     }
 }; 
+
+module.exports.GET_Rooms = (req, res, next) => {
+    if(req.logged_in)
+    {
+        Room.findAll((rooms) => {
+            res.render('rooms', {page_title : 'Rooms', rooms : rooms});
+        });
+    }
+    else 
+    {
+        req.error_message = "You have not logged in!";
+        return next();
+    }
+};
 
 module.exports.GET_Chat_Server = (req, res, next) => {
     const room_id = req.params.id;
