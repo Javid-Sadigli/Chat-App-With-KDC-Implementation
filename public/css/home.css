@@ -6,14 +6,14 @@ main{
     height: 450px;
 }
 
-.login-h1{
+.home-h1{
     color: darkgreen;
 }
 p{
     font-size: 20px;
 }
 
-.login-a{
+.home-a{
     margin-top: 20px;
     width: 400px;
     height: 50px;
@@ -27,6 +27,6 @@ p{
     transition: transform 0.3s;
 }
 
-.login-a:hover{
+.home-a:hover{
     transform: scale(1.05);
 }

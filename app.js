@@ -61,9 +61,6 @@ app.use(main_controller.SEND_Error_Page);
 
 /* Chat Server */
 io.on('connection', (socket) => {
-
-    console.log('A user connected');
-
     // Joining a room
     socket.on('joinRoom', ({room, publicKey, username}) => {
         Room.findById(room, (the_room) => {
@@ -84,8 +81,7 @@ io.on('connection', (socket) => {
     
     socket.on('sendMessage', ({ room, message, username}) => {
         io.to(room).emit('message', {message: message, username: username});
-        console.log(`Message from ${username} sent to room ${room}: ${message}`);
-        console.log(typeof room);
+        console.log(`Encrypted message from ${username} sent to room ${room}: ${message}`);
     });
 
     socket.on('hostLeftTheRoom', (roomId) => {
@@ -94,13 +90,9 @@ io.on('connection', (socket) => {
         });
     });
 
-    socket.on('leaveRoom', (room, username) => {
-        io.to(room).emit('joinLeaveMessage', `${username} left from the room.`);
-    });
-
-    // Handling disconnection
-    socket.on('disconnect', () => {
-        console.log('A user disconnected');
+    socket.on('leaveRoom', ({roomId, username}) => {
+        console.log(`${username} left from the room ${roomId}.`);
+        io.to(roomId).emit('joinLeaveMessage', `${username} left from the room.`);
     });
 });
 

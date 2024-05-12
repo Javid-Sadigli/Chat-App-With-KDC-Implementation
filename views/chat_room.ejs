@@ -35,13 +35,22 @@
 
             // Receive messages
             socket.on('message', ({message, username}) => {
-                console.log('Received message:', message, "from", username);
+                console.log('Received an encrypted message:', message, "from", username);
                 const decryptedMessage = decipher(message, sessionKey);
-                console.log(username + ' : ' + decryptedMessage);
+                document.getElementById('messages').innerHTML += `
+                <div class="message-div">
+                    <b class="username">${username} : </b>
+                    <div class="message">${decryptedMessage}</div>
+                </div>
+                `;
             });
 
-            socket.on('joinLeaveMessage', (joinMessage) => {
-                console.log(joinMessage);
+            socket.on('joinLeaveMessage', (joinLeaveMessage) => {
+                document.getElementById('messages').innerHTML += `
+                <div class="message-div">
+                    <i>${joinLeaveMessage}</i>
+                </div>
+                `
             }); 
 
             
@@ -73,13 +82,15 @@
 
         </script>
 
-        <div class="send-message-div">
-            <input type="text" placeholder="Send message" id="message">
-            <button type="button" onclick="sendMessageToServer()">Send</button>
+        <div class="below">
+            <div class="send-message-div">
+                <input type="text" placeholder="Send message" id="message" class="message-input">
+                <button type="button" onclick="sendMessageToServer()" class="send-button">Send</button>
+            </div>
+            <button type="button" onclick="leaveTheRoom()" class="leave-button">
+                Leave the room
+            </button>
         </div>
-        <button type="button" onclick="leaveTheRoom()">
-            Leave the room
-        </button>
 
     </main>
 

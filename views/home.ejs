@@ -6,14 +6,19 @@
 
     <main>
         <% if (logged_in) { %>
-            
-        <% } else { %>
-            <h1 class="login-h1">Welcome to the Messaging System</h1>
-            <p class="login-p">
-                For starting to send and receive 
-                messages, you need to login first. 
+            <h1 class="home-h1">Welcome to the Messaging System</h1>
+            <p class="home-p">
+                You have logged in successfully. 
+                Now you can enter a room and start chatting.
             </p>
-            <a href="/login" class="login-a">Login</a>
+            <a href="/rooms" class="home-a">See rooms</a>
+        <% } else { %>
+            <h1 class="home-h1">Welcome to the Messaging System</h1>
+            <p class="home-p">
+                To start chatting with other users, 
+                you need to login first.
+            </p>
+            <a href="/login" class="home-a">Login</a>
         <% } %>
     </main>
 </body>
