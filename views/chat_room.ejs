@@ -63,7 +63,8 @@
 
             function sendMessageToServer(){
                 const message = document.getElementById('message').value;
-                const encryptedMessage = cipher(message, sessionKey); 
+                const encryptedMessage = cipher(message, sessionKey);
+                document.getElementById('message').value = ''; 
                 socket.emit('sendMessage', { room: roomId, message: encryptedMessage, username: username});
                 console.log("Message sent to the room " + roomId);
             }
