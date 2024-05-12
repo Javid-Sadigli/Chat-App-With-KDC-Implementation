@@ -62,9 +62,9 @@
             
 
             function sendMessageToServer(){
-                const message = document.getElementById('message').value;
+                const message = document.getElementById('_message').value;
                 const encryptedMessage = cipher(message, sessionKey);
-                document.getElementById('message').value = ''; 
+                document.getElementById('_message').value = ''; 
                 socket.emit('sendMessage', { room: roomId, message: encryptedMessage, username: username});
                 console.log("Message sent to the room " + roomId);
             }
@@ -85,7 +85,7 @@
 
         <div class="below">
             <div class="send-message-div">
-                <input type="text" placeholder="Send message" id="message" class="message-input">
+                <input type="text" placeholder="Send message" id="_message" class="message-input">
                 <button type="button" onclick="sendMessageToServer()" class="send-button">Send</button>
             </div>
             <button type="button" onclick="leaveTheRoom()" class="leave-button">
