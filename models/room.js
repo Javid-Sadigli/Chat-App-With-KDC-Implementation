@@ -70,6 +70,21 @@ class Room
         });
     }
 
+    static findByIdAndDelete(id, CALLBACK)
+    {
+        Room.findAll((rooms) => {
+            const length = rooms.length;
+            for(let i = 0; i < length; i++)
+            {
+                if(rooms[i].id == id)
+                {
+                    rooms.splice(i, 1);
+                }
+            }; 
+            filesystem.writeToFile(database_path, rooms, CALLBACK);
+        });
+    }
+
     static findAll(CALLBACK)
     {
         filesystem.readFromFile(database_path, (data) => 

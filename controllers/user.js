@@ -65,8 +65,7 @@ module.exports.POST_Create_Room = (req, res, next) => {
         const room = new Room(title, password); 
         
         room.save(() => {
-            req.info = "Room created successfully.";
-            return next();
+            res.render('chat_room', {page_title : 'Chat', room_id : room.id, delete_on_left : true});
         });
     }
     else 
@@ -108,7 +107,7 @@ module.exports.POST_Chat_Room = (req, res, next) => {
         Room.findById(room_id, (room) => {
             if(room && room.password == password)
             {
-                res.render('chat_room', {page_title : "Chat", room_id : room_id});
+                res.render('chat_room', {page_title : "Chat", room_id : room_id, delete_on_left : false});
             }
             else if(room)
             {
@@ -129,7 +128,28 @@ module.exports.POST_Chat_Room = (req, res, next) => {
     }
 };  
 
-module.exports.GET_Chat_Server = (req, res, next) => {
-    const room_id = req.params.id;
-    res.render('chat_server', {page_title : "Chat", room_id : room_id});
-};
+module.exports.GET_Leaved_Room = (req, res, next) => {
+    if(req.logged_in)
+    {
+        req.info = "You have left the room successfully!";
+        return next();
+    }
+    else 
+    {
+        req.error_message = "You have not logged in!";
+        return next();
+    }
+}; 
+
+module.exports.GET_Host_Left = (req, res, next) => {
+    if(req.logged_in)
+    {
+        req.info = "The host left the room.";
+        return next();
+    }
+    else 
+    {
+        req.error_message = "You have not logged in!";
+        return next();
+    }
+}; 

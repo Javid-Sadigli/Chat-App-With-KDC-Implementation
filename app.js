@@ -70,8 +70,9 @@ io.on('connection', (socket) => {
             if(the_room)
             {
                 socket.join(room);
-                console.log(`${username} joined room: ${room}`);
-                
+
+                io.to(room).emit('joinLeaveMessage', `${username} joined to the room.`);
+
                 const encryptedSessionKey = rsa.encrypt(publicKey, JSON.stringify(the_room.sessionKey));
                 
                 // Send encrypted session key to the user
@@ -85,6 +86,16 @@ io.on('connection', (socket) => {
         io.to(room).emit('message', {message: message, username: username});
         console.log(`Message from ${username} sent to room ${room}: ${message}`);
         console.log(typeof room);
+    });
+
+    socket.on('hostLeftTheRoom', (roomId) => {
+        Room.findByIdAndDelete(roomId, () => {
+            io.to(roomId).emit('hostLeftTheRoom'); 
+        });
+    });
+
+    socket.on('leaveRoom', (room, username) => {
+        io.to(room).emit('joinLeaveMessage', `${username} left from the room.`);
     });
 
     // Handling disconnection
