@@ -40,7 +40,7 @@ It's a monoalphabetic substitution cipher, meaning that each letter is replaced 
 ## Features of the Project 
 This project's main features are as follows: 
 * Key Distribution Center implementation that provides secure key distribution using RSA encryption.
-* Session based authentication that provides users to login and regisrer securely. 
+* Session based authentication that provides users to login and register securely. 
 * Socket.io implementation that provides users a secure WebSocket server to chat with each other
 * Using of JSON files as database for saving datas.
 
