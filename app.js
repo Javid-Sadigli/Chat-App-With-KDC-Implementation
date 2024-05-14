@@ -68,7 +68,7 @@ io.on('connection', (socket) => {
             {
                 socket.join(room);
 
-                io.to(room).emit('joinLeaveMessage', `${username} joined to the room.`);
+                io.to(room).emit('joinLeaveMessage', `${username} joined the room.`);
 
                 const encryptedSessionKey = rsa.encrypt(publicKey, JSON.stringify(the_room.sessionKey));
                 
